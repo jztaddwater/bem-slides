@@ -104,6 +104,10 @@ body {
   margin: 0;
 }
 
+.reveal .image--no-shadow {
+  box-shadow: none;
+}
+
 .reveal strong,
 .reveal b {
   font-weight: bold; }
