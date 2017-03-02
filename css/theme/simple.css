@@ -49,6 +49,10 @@ body {
   text-decoration: underline;
  }
 
+p strong {
+  text-decoration: none;
+}
+
 .reveal h1,
 .reveal h2,
 .reveal h3,
