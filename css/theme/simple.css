@@ -108,6 +108,10 @@ body {
   box-shadow: none;
 }
 
+.reveal .twitter-tweet {
+  margin: 0 auto;
+}
+
 .reveal strong,
 .reveal b {
   font-weight: bold; }
