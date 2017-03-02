@@ -11,6 +11,7 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/main.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -24,14 +25,25 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>BEM</section>
 				<section>
-					<h2>The World of CSS</h1>
-					<p>easy to abuse</p>
+					<h1>Let's talk about BEM</h1>
 				</section>
 				<section>
-					<h2>Specificity</h1>
-					<blockquote>Specificity determines which CSS rule is applied by the browsers. If two selectors apply to the same element, the one with higher specificity wins.</blockquote>
+					<h2>CSS Headaches</h1>
+					<p>Something in one spot breaks something in another spot</p>
+					<img src="images/tableflip.gif">
+				</section>
+				<section>
+					<h3>The <strong>cascade</strong> is about what takes precedence when there is a conflict.</h3>
+					<ul>
+						<li>Later properties override earlier properties</li>
+						<li>More specific selectors override less specific selectors</li>
+						<li>Specified properties override inherited properties</li>
+					</ul>
+				</section>
+				<section>
+					<h3><strong>Specificity</strong> determines which CSS rule is applied by the browsers.</h3>
+					<p>If two selectors apply to the same element, the one with higher specificity wins.</p>
 				</section>
 				<section>
 					<h3>Rules for winning the specificity battle</h3>
@@ -48,34 +60,122 @@
 					<p>You need to become <strong>more specific</strong> to win over existent specificity.</p>
 				</section>
 				<section>
-					<h3>Bootstrap</h3>
-					<p>You need to become <strong>more specific</strong> to win over existent specificity.</p>
+					<h3>Really large apps need clearer strategy</h3>
+					<ul>
+						<li>Takes a while to familiarize yourself with different sections of the app</li>
+						<li>Code becomes harder and harder to maintain with so many overrides</li>
+						<li>Naming things is <em>incredibly</em> difficult</li>
+						<li>Previous strategy was more preference based</li>
+					</ul>
 				</section>
 				<section>
-					BEM
+					<h3>What did that lead to?</h3>
 					<pre class="css">
 						<code class="css">
-.navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
-  border-color: #080808;
-}
-.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-  color: #999999;
-}
-.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
-.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
-  color: #ffffff;
-  background-color: transparent;
-}
-.navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
-.navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
-.navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
-  color: #ffffff;
-  background-color: #080808;
-}
+.sidebar .widget .btn { ... }
+#sidebar .widget.resources .resource-item > .btn {...}
+#sidebar .widget.large li .btn.small {...}
 						</code>
 					</pre>
 				</section>
-				<section>Slide 2</section>
+				<section>
+					<pre class="html">
+						<code class="html">
+<header class="header large reverse full">
+	<img src="path/to/something" class="image full">
+	<button class="button large secondary">Click me</button>
+</header>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>What did our strategy need?</h3>
+					<ul>
+						<li>Facilitate refuse</li>
+						<li>Modular encapsulation </li>
+						<li>Reduce naming headaches</li>
+						<li>Help us intelligently structure pages across large projects</li>
+						<li>Clarity/transparent</li>
+						<li>Cleaner/higher quality code</li>
+						<li>Increase collaboration</li>
+					</ul>
+				</section>
+				<section>
+					<h2>That's where BEM comes in</h2>
+					<h3 class="example"><code>block__element--modifier</code></h3>
+				</section>
+				<section>
+					<h2>Block</h3>
+					<h4>Standalone entity that is meaningful on its own.</h4>
+					<p class="example">e.g. header, container, menu, checkbox, input</p>
+				</section>
+				<section>
+					<h2>Element</h3>
+					<h4>A part of a block that has no standalone meaning and is semantically tied to its block.</h4>
+					<p class="example">e.g. menu item, list item, checkbox caption, header title</p>
+				</section>
+				<section>
+					<h2>Modifier</h2>
+					<h4>A flag on a block or element. <br/>Use them to change appearance or behavior.</h4>
+					<p class="example">e.g. disabled, highlighted, checked, fixed</p>
+				</section>
+				<section>
+					<img src="images/github-bem.jpg">
+				</section>
+				<section>
+					<h3>How does it look in practice?</h3>
+					<pre>
+						<code>
+<div class="rj-notification rj-notification--success">
+	<i class="rj-notification__icon rj-notification__icon--medium"></i>
+	<div class="rj-notification__content">New metric created!</div>
+	<a class="rj-notification__dismiss">×</a>
+</div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>In the CSS</h3>
+					<pre>
+						<code>
+.rj-notification {...}
+
+.rj-notification__content {...}
+
+.rj-notification__icon {...}
+
+.rj-notification__icon--medium {...}
+
+.rj-notification__dismiss {...}
+
+.rj-notification--success {...}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>How does this help us?</h3>
+				</section>
+				<section>
+					<h3>Modularity</h3>
+					<ul>
+						<li>Never dependent on other elements on a page</li>
+						<li>Never experience problems from cascading</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Reusability</h3>
+					<ul>
+						<li>Build a library of blocks - great for styleguide</li>
+						<li>Reduces the amount of CSS code that you will have to maintain</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Structure</h3>
+					<ul>
+						<li>Simple and easy to understand</li>
+						<li>Makes naming a breeze</li>
+					</ul>
+				</section>
 			</div>
 		</div>
 
