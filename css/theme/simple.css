@@ -98,6 +98,12 @@ body {
   max-width: 95%;
   max-height: 95%; }
 
+.reveal .icon {
+  width: 30px;
+  box-shadow: none;
+  margin: 0;
+}
+
 .reveal strong,
 .reveal b {
   font-weight: bold; }
